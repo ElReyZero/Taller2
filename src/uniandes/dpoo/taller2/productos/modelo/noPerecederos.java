@@ -12,11 +12,20 @@ public class noPerecederos extends producto
     {
         super(pNombre, pPeso, pVolumen, pPerecedero, pMaxTemp);
         super.perecedero = false;
-        toxicidad = false;
-        nivelToxicidad = 0;
+        toxicidad = pToxicidad;
+        nivelToxicidad = pNivelToxicidad;
     }
     
     //*Métodos//
+
+    @Override
+    public String darCaracteristicas()
+    {
+        String variable =super.darCaracteristicas();
+        variable+= " "+toxicidad+" "+nivelToxicidad;
+        return variable;
+    }
+
 
     public boolean darToxicidad()
     {

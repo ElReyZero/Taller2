@@ -1,8 +1,6 @@
 package uniandes.dpoo.taller2.productos.modelo;
 
-import java.util.ArrayList;
-
-public class producto 
+public class producto implements IProducto 
 {
 	
 	//* Atributos//
@@ -20,40 +18,28 @@ public class producto
 		peso = pPeso;
 		volumen = pVolumen;
 		perecedero = true;
-		maxTemp = 50.0;
+		maxTemp = pMaxTemp;
 	}
 	
 	
 	//*Métodos//
 	
-	public Boolean compararProd(producto pProducto1, producto pProducto2)
+	public Boolean compararProd(producto pProducto2)
 	{
-		if(pProducto1.equals(pProducto2))
+		if(this.darNombre().equals(pProducto2.darNombre()))
 		return true;
 		else
 		return false;
 	}
 
-	public ArrayList<String> darCaracteristicas()
+	public String darCaracteristicas()
 	{
-		ArrayList<String> caracteristicas = new ArrayList<String>();
 		String name = nombre.toString();
 		String weight = peso.toString();
 		String vol = volumen.toString();
-		if (perecedero)
-		caracteristicas.add("true");
-		else
-		caracteristicas.add("false");
 		String temp = maxTemp.toString();
-		caracteristicas.add(name);
-		caracteristicas.add(weight);
-		caracteristicas.add(vol);
-		caracteristicas.add(temp);
-		if (perecedero)
-		caracteristicas.add("true");
-		else
-		caracteristicas.add("false");
-		return caracteristicas;
+		String resultado = ""+name+" "+weight+" "+vol+" "+perecedero+" "+temp;
+		return resultado;
 
 	}
 
