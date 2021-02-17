@@ -118,7 +118,7 @@ public class contenedor implements IContenedor
         String manifiesto = "Manifiesto del contenedor:\nEste contenedor tiene los siguientes cargamentos:\n";
         for (Map.Entry<String,cargamento> carga : DictCarga.entrySet()) 
         {
-            manifiesto += "Cargamento ID: "+carga.getKey().toString()+" - Tipo de Producto: "+carga.getValue().darTipoProd()+"\n";
+            manifiesto += "Cargamento ID: "+carga.getKey().toString()+"\nPropietario: "+carga.getValue().darPropietario()+"\nTipo de Producto: "+carga.getValue().darTipoProd()+"*************************************************************************";
         }
         manifiesto += "Peso Total de la Carga: "+this.pesoCarga.toString()+"toneladas.\n"+"Volumen Total de la Carga: "+this.volumenOcupado.toString()+"m^3.\nCondiciones: \nRefrigeración Requerida: "+this.necesitaRefrigeracion+"\nTemperatura Máxima: "+this.maxTemp.toString()+"\nContiene Productos Tóxicos: "+this.tieneToxico;
         return manifiesto;
