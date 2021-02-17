@@ -1,4 +1,4 @@
-package uniandes.dpoo.taller2.contenedores.modelo;
+package uniandes.dpoo.taller2.extension.modelo;
 
 public class contenedorExclusivo extends contenedor
 {

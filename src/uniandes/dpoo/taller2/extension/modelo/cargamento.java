@@ -1,7 +1,4 @@
-package uniandes.dpoo.taller2.contenedores.modelo;
-import uniandes.dpoo.taller2.productos.modelo.Perecederos;
-import uniandes.dpoo.taller2.productos.modelo.noPerecederos;
-import uniandes.dpoo.taller2.productos.modelo.producto;
+package uniandes.dpoo.taller2.extension.modelo;
 
 public class cargamento 
 {

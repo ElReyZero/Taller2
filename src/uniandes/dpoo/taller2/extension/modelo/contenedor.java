@@ -1,4 +1,4 @@
-package uniandes.dpoo.taller2.contenedores.modelo;
+package uniandes.dpoo.taller2.extension.modelo;
 
 import java.util.Map;
 import java.util.TreeMap;

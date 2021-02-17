@@ -1,4 +1,4 @@
-package uniandes.dpoo.taller2.productos.modelo;
+package uniandes.dpoo.taller2.extension.modelo;
 
 public class noPerecederos extends producto 
 {
