@@ -6,9 +6,9 @@ public class contenedorExclusivo extends contenedor
     private String tipoContenedor;
 
     //*Constructor//
-    public contenedorExclusivo(String pPropietario, String pIdentificador, Integer pCantidadProd, Double pCapacidadVol, Double pCapacidadPeso, boolean pExclusividad, Double pPesoCarga, String pTipoContenedor) 
+    public contenedorExclusivo(Double pCapacidadVol, Double pCapacidadPeso, boolean pExclusividad, Double pPesoCarga, String pTipoContenedor) 
     {
-        super(pPropietario, pIdentificador, pCantidadProd, pCapacidadVol, pCapacidadPeso, pExclusividad, pPesoCarga);
+        super(pCapacidadVol, pCapacidadPeso, pExclusividad);
         super.exclusividad = true;
         tipoContenedor = pTipoContenedor;
     }
