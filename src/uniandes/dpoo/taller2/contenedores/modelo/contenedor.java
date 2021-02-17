@@ -34,7 +34,6 @@ public class contenedor implements IContenedor
         }
 
     //*Métodos//
-
     public boolean addCargo(cargamento Cargo) 
     {
         Double pesoTotal = this.pesoCarga + Cargo.darPesoCarga();
@@ -89,7 +88,13 @@ public class contenedor implements IContenedor
 		String volumen = capacidadVol.toString();
         String peso = capacidadPeso.toString();
         String carga = pesoCarga.toString();
-		String resultado = " "+volumen+" "+peso+" "+exclusividad+" "+carga;
+        String volOcupado = volumenOcupado.toString();
+        String temp = "null";
+        if(maxTemp != null)
+        {
+            temp = maxTemp.toString();
+        }
+		String resultado = " "+volumen+" "+peso+" "+exclusividad+" "+carga+" "+volOcupado+" "+tienePerecedero+" "+tieneToxico+" "+necesitaRefrigeracion+" "+temp;
         return resultado;
     }
     
