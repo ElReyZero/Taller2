@@ -2,24 +2,24 @@ package uniandes.dpoo.taller2.extension.modelo;
 
 public class contenedorLIFO extends contenedor
 {
-    private String ultimacarga;
+    private String ultimaCarga;
     public contenedorLIFO(Double pCapacidadVol, Double pCapacidadPeso) 
     {
         super(pCapacidadVol, pCapacidadPeso);
-        ultimacarga = null;
+        ultimaCarga = null;
         
     }
     @Override
     public boolean addCargo(cargamento Cargo)
     {
-    	ultimacarga=Cargo.darIdentificador();
+    	ultimaCarga=Cargo.darIdentificador();
         return super.addCargo(Cargo);
     }
     @Override
     public void retirarCargamento(String identificador)
     {
-    	if (ultimacarga != null)
-    		super.retirarCargamento(ultimacarga);    
+    	if (ultimaCarga != null)
+    		super.retirarCargamento(ultimaCarga);    
     }
 
 }
