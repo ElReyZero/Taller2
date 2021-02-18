@@ -19,11 +19,11 @@ public class contenedor implements IContenedor
 
     //*Constructor//
 
-    public contenedor(Double pCapacidadVol, Double pCapacidadPeso, boolean pExclusividad)
+    public contenedor(Double pCapacidadVol, Double pCapacidadPeso)
     {
         capacidadVol = pCapacidadVol;
         capacidadPeso = pCapacidadPeso;
-        exclusividad = pExclusividad;
+        exclusividad = false;
         pesoCarga = 0.0;
         volumenOcupado = 0.0;
         tienePerecedero = false;
@@ -41,29 +41,7 @@ public class contenedor implements IContenedor
         if(this.maxTemp == null)
         maxTemp = Cargo.darProducto().darTempMax();
 
-        if (pesoTotal > this.capacidadPeso)
-        {
-            return false;
-        }
-        else if (volumenTotal > this.capacidadVol)
-        {
-            return false;
-        }
-        else if (this.tienePerecedero == true && Cargo.darToxicidadCarga()  == true)
-        {
-            return false;
-        }
-        else if (this.tienePerecedero == false && Cargo.darProducto().darTempMax() < 0.0)
-        {
-            return false;
-        }
-        else if (this.maxTemp<Cargo.darProducto().darTempMax())
-        {
-            return false;
-        }
-        else
-        {            
-            if (Cargo.darProducto().darTipoPerecedero())
+        if (Cargo.darProducto().darTipoPerecedero())
             {
                 tienePerecedero = true;
             }
@@ -75,6 +53,91 @@ public class contenedor implements IContenedor
             {
                 necesitaRefrigeracion = true;
             }
+
+        if (pesoTotal > this.capacidadPeso)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (volumenTotal > this.capacidadVol)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (this.tienePerecedero == true && Cargo.darToxicidadCarga()  == true)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (this.tienePerecedero == false && Cargo.darProducto().darTempMax() < 0.0)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (this.maxTemp<Cargo.darProducto().darTempMax())
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else
+        {            
+            volumenOcupado = Cargo.darVolumenCarga();
+            pesoCarga = Cargo.darPesoCarga();
             maxTemp = Cargo.darProducto().darTempMax();
             DictCarga.put(Cargo.darIdentificador(), Cargo);
             return true;
@@ -94,7 +157,7 @@ public class contenedor implements IContenedor
         {
             temp = maxTemp.toString();
         }
-		String resultado = " "+volumen+" "+peso+" "+exclusividad+" "+carga+" "+volOcupado+" "+tienePerecedero+" "+tieneToxico+" "+necesitaRefrigeracion+" "+temp;
+		String resultado = ""+volumen+" "+peso+" "+exclusividad+" "+carga+" "+volOcupado+" "+tienePerecedero+" "+tieneToxico+" "+necesitaRefrigeracion+" "+temp;
         return resultado;
     }
     
@@ -115,12 +178,12 @@ public class contenedor implements IContenedor
 
     public String generarManifiesto() 
     {
-        String manifiesto = "Manifiesto del contenedor:\nEste contenedor tiene los siguientes cargamentos:\n";
+        String manifiesto = "\nManifiesto del contenedor:\nEste contenedor tiene los siguientes cargamentos:\n";
         for (Map.Entry<String,cargamento> carga : DictCarga.entrySet()) 
         {
-            manifiesto += "Cargamento ID: "+carga.getKey().toString()+"\nPropietario: "+carga.getValue().darPropietario()+"\nTipo de Producto: "+carga.getValue().darTipoProd()+"*************************************************************************";
+            manifiesto +="\nCargamento ID: "+carga.getKey().toString()+"\nPropietario: "+carga.getValue().darPropietario()+"\nTipo de Producto: "+carga.getValue().darTipoProd()+"\n";
         }
-        manifiesto += "Peso Total de la Carga: "+this.pesoCarga.toString()+"toneladas.\n"+"Volumen Total de la Carga: "+this.volumenOcupado.toString()+"m^3.\nCondiciones: \nRefrigeración Requerida: "+this.necesitaRefrigeracion+"\nTemperatura Máxima: "+this.maxTemp.toString()+"\nContiene Productos Tóxicos: "+this.tieneToxico;
+        manifiesto += "\nPeso Total de la Carga: "+this.pesoCarga.toString()+" toneladas.\n"+"Volumen Total de la Carga: "+this.volumenOcupado.toString()+" m^3."+"\n*************************************************************\nCondiciones: \nRefrigeración Requerida: "+this.necesitaRefrigeracion+"\nTemperatura Máxima: "+this.maxTemp.toString()+" °C.\nContiene Productos Tóxicos: "+this.tieneToxico+"\n";
         return manifiesto;
     }
 

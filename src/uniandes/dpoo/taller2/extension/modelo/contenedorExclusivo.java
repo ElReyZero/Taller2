@@ -6,9 +6,9 @@ public class contenedorExclusivo extends contenedor
     private String tipoContenedor;
 
     //*Constructor//
-    public contenedorExclusivo(Double pCapacidadVol, Double pCapacidadPeso, boolean pExclusividad, Double pPesoCarga, String pTipoContenedor) 
+    public contenedorExclusivo(Double pCapacidadVol, Double pCapacidadPeso,String pTipoContenedor) 
     {
-        super(pCapacidadVol, pCapacidadPeso, pExclusividad);
+        super(pCapacidadVol, pCapacidadPeso);
         super.exclusividad = true;
         tipoContenedor = pTipoContenedor;
     }
@@ -32,33 +32,7 @@ public class contenedorExclusivo extends contenedor
         if(this.maxTemp == null)
         maxTemp = Cargo.darProducto().darTempMax();
 
-        if (Cargo.darTipoProd()!= this.tipoContenedor)
-        {
-            return false;
-        }
-        else if (pesoTotal > this.capacidadPeso)
-        {
-            return false;
-        }
-        else if (volumenTotal > this.capacidadVol)
-        {
-            return false;
-        }
-        else if (this.tienePerecedero == true && Cargo.darToxicidadCarga()  == true)
-        {
-            return false;
-        }
-        else if (this.tienePerecedero == false && Cargo.darProducto().darTempMax() < 0.0)
-        {
-            return false;
-        }
-        else if (this.maxTemp<Cargo.darProducto().darTempMax())
-        {
-            return false;
-        }
-        else
-        {            
-            if (Cargo.darProducto().darTipoPerecedero())
+        if (Cargo.darProducto().darTipoPerecedero())
             {
                 tienePerecedero = true;
             }
@@ -70,6 +44,96 @@ public class contenedorExclusivo extends contenedor
             {
                 necesitaRefrigeracion = true;
             }
+            
+        if (Cargo.darTipoProd()!= this.tipoContenedor)
+        {
+            return false;
+        }
+
+        else if (pesoTotal > this.capacidadPeso)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (volumenTotal > this.capacidadVol)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (this.tienePerecedero == true && Cargo.darToxicidadCarga()  == true)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (this.tienePerecedero == false && Cargo.darProducto().darTempMax() < 0.0)
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else if (this.maxTemp<Cargo.darProducto().darTempMax())
+        {
+            if (Cargo.darProducto().darTipoPerecedero())
+            {
+                tienePerecedero = false;
+            }
+            if (Cargo.darToxicidadCarga())
+            {
+                tieneToxico = false;
+            }
+            if (Cargo.darRefrigeracionCarga())
+            {
+                necesitaRefrigeracion = false;
+            }
+            return false;
+        }
+        else
+        {            
+            volumenOcupado = Cargo.darVolumenCarga();
+            pesoCarga = Cargo.darPesoCarga();
             maxTemp = Cargo.darProducto().darTempMax();
             DictCarga.put(Cargo.darIdentificador(), Cargo);
             return true;

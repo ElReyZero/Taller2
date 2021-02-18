@@ -17,7 +17,7 @@ public class producto implements IProducto
 		nombre = pNombre;
 		peso = pPeso;
 		volumen = pVolumen;
-		perecedero = true;
+		perecedero = pPerecedero;
 		maxTemp = pMaxTemp;
 	}
 	

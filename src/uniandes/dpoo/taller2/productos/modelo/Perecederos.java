@@ -7,9 +7,10 @@ public class Perecederos extends producto
     private boolean resistencia;
     
     //*Constructor//
-    public Perecederos(String pNombre, Double pPeso, Double pVolumen, Double pMaxTemp, boolean pPerecedero, boolean pRefrigeracion, boolean pResistencia)
+    public Perecederos(String pNombre, Double pPeso, Double pVolumen, boolean pPerecedero, Double pMaxTemp, boolean pRefrigeracion, boolean pResistencia)
      {
         super(pNombre, pPeso, pVolumen, pPerecedero, pMaxTemp);
+        super.perecedero = true;
         refrigeracion = pRefrigeracion;
         resistencia = pResistencia;
     }

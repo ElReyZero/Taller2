@@ -3,9 +3,9 @@ package uniandes.dpoo.taller2.extension.modelo;
 public class contenedorLIFO extends contenedor
 {
     private String ultimacarga;
-    public contenedorLIFO(Double pCapacidadVol, Double pCapacidadPeso, boolean pExclusividad) 
+    public contenedorLIFO(Double pCapacidadVol, Double pCapacidadPeso) 
     {
-        super(pCapacidadVol, pCapacidadPeso, pExclusividad);
+        super(pCapacidadVol, pCapacidadPeso);
         ultimacarga = null;
         
     }

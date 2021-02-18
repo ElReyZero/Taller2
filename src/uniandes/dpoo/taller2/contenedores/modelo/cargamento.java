@@ -2,6 +2,7 @@ package uniandes.dpoo.taller2.contenedores.modelo;
 import uniandes.dpoo.taller2.productos.modelo.Perecederos;
 import uniandes.dpoo.taller2.productos.modelo.noPerecederos;
 import uniandes.dpoo.taller2.productos.modelo.producto;
+import java.lang.Math;
 
 public class cargamento 
 {
@@ -24,8 +25,8 @@ public class cargamento
         cantidadProd = pCantidadProd;
         product = pProduct;
         tipoProducto = product.darNombre();
-        pesoCarga = (product.darPeso()*cantidadProd)/(10^6);
-        volumenCarga = (product.darVolumen()*cantidadProd)/(10^6);
+        pesoCarga = (product.darPeso()*cantidadProd)/(Math.pow(10,6));
+        volumenCarga = (product.darVolumen()*cantidadProd)/(Math.pow(10,6));
         toxicidadCarga = false;
         refrigeracionCarga = false;
 
@@ -45,7 +46,7 @@ public class cargamento
         {
            boolean var2 = ((Perecederos)product).darRefrigeracion();        ///El programa revisa que el producto necesite o no refrigeración//
            if (var2)
-           refrigeracionCarga = false;
+           refrigeracionCarga = true;
         } 
         catch (Exception e) {
             ;
@@ -61,7 +62,7 @@ public class cargamento
 		String prod = cantidadProd.toString();
         String peso = pesoCarga.toString();
         String volumen = volumenCarga.toString();
-        String resultado = " "+owner+" "+id+" "+cantidadProd+" "+prod+" "+peso+" "+volumen+" "+toxicidadCarga;
+        String resultado = ""+owner+" "+id+" "+cantidadProd+" "+prod+" "+peso+" "+volumen+" "+toxicidadCarga;
         return resultado;
     }
 
