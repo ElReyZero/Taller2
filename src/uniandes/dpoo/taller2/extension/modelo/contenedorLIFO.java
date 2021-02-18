@@ -18,7 +18,7 @@ public class contenedorLIFO extends contenedor
     @Override
     public void retirarCargamento(String identificador)
     {
-    	if (ultimacarga.equals(identificador) && ultimacarga != null)
+    	if (ultimacarga != null)
     		super.retirarCargamento(ultimacarga);    
     }
 

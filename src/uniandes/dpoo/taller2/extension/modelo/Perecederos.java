@@ -9,7 +9,7 @@ public class Perecederos extends producto
     private String fechaVencimiento;
     
     //*Constructor//
-    public Perecederos(String pNombre, Double pPeso, Double pVolumen, Double pMaxTemp, boolean pPerecedero, boolean pRefrigeracion, boolean pResistencia, String pTipo, String pFecha)
+    public Perecederos(String pNombre, Double pPeso, Double pVolumen, boolean pPerecedero, Double pMaxTemp,  boolean pRefrigeracion, boolean pResistencia, String pTipo, String pFecha)
      {
         super(pNombre, pPeso, pVolumen, pPerecedero, pMaxTemp, pResistencia);
         refrigeracion = pRefrigeracion;

@@ -11,12 +11,12 @@ public class contenedorTS extends contenedor{
 	@Override 
 	public String generarManifiesto() 
     {
-        String manifiesto = "Manifiesto del contenedor:\nEste contenedor tiene los siguientes cargamentos:";
+        String manifiesto = "\nManifiesto del contenedor:\nEste contenedor tiene los siguientes cargamentos:\n";
         for (Map.Entry<String,cargamento> carga : DictCarga.entrySet()) 
         {
-            manifiesto += "\nCargamento ID: "+carga.getKey().toString()+"\nFecha de Vencimiento: "+carga.getValue().darFechaVencimiento()+"*************************************************************************";
+            manifiesto += "\nCargamento ID: "+carga.getKey().toString()+"\nFecha de Vencimiento: "+carga.getValue().darFechaVencimiento()+"\n*************************************************************************";
         }
-        manifiesto += "Peso Total de la Carga: "+this.pesoCarga.toString()+"toneladas.\n"+"Volumen Total de la Carga: "+this.volumenOcupado.toString()+"m^3.\nCondiciones: \nRefrigeración Requerida: "+this.necesitaRefrigeracion+"\nTemperatura Máxima: "+this.maxTemp.toString()+"\nContiene Productos Tóxicos: "+this.tieneToxico;
+        manifiesto += "\nPeso Total de la Carga: "+this.pesoCarga.toString()+" toneladas.\n"+"Volumen Total de la Carga: "+this.volumenOcupado.toString()+" m^3.\n*************************************************************************\nCondiciones: \nRefrigeración Requerida: "+this.necesitaRefrigeracion+"\nTemperatura Máxima: "+this.maxTemp.toString()+"\nContiene Productos Tóxicos: "+this.tieneToxico+"\n";
         return manifiesto;
 	}
 }
